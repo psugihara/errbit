@@ -13,9 +13,7 @@ class Err
   field :fingerprint
 
   belongs_to :problem
-  index :problem_id
-  index :error_class
-  index :fingerprint
+  index({ problem_id: 1, error_class:1, fingerprint: 1 })
 
   has_many :notices, :inverse_of => :err, :dependent => :destroy
 

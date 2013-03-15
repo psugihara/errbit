@@ -26,14 +26,8 @@ class Problem
   field :hosts,       :type => Hash, :default => {}
   field :comments_count, :type => Integer, :default => 0
 
-  index :app_id
-  index :app_name
-  index :message
-  index :last_notice_at
-  index :first_notice_at
-  index :last_deploy_at
-  index :resolved_at
-  index :notices_count
+  index({ app_id: 1, app_name: 1, message: 1, last_notice_at: 1, first_notice_at: 1,
+    last_deploy_at:1, resolved_at: 1, notices_count:1 })
 
   belongs_to :app
   has_many :errs, :inverse_of => :problem, :dependent => :destroy

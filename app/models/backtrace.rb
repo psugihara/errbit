@@ -3,7 +3,7 @@ class Backtrace
   include Mongoid::Timestamps
 
   field :fingerprint
-  index :fingerprint
+  index({ fingerprint: 1 })
 
   has_many :notices
   has_one :notice

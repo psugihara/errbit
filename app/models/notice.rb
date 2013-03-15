@@ -17,14 +17,7 @@ class Notice
 
   belongs_to :err
   belongs_to :backtrace, :index => true
-  index :created_at
-  index(
-    [
-      [ :err_id, Mongo::ASCENDING ],
-      [ :created_at, Mongo::ASCENDING ],
-      [ :_id, Mongo::ASCENDING ]
-    ]
-  )
+  index({ err_id: 1, created_at: 1, _id:1 })
 
   after_create :increase_counter_cache, :cache_attributes_on_problem, :unresolve_problem
   before_save :sanitize
