@@ -3,8 +3,8 @@ source 'http://rubygems.org'
 gem 'rails', '3.2.12'
 gem 'mongoid', '~> 3.1.2'
 gem 'mongoid_rails_migrations'
-gem 'devise-encryptable'
 gem 'devise', '~> 2.2.3'
+gem 'devise-encryptable'
 gem 'haml'
 gem 'htmlentities', "~> 4.3.0"
 gem 'rack-ssl', :require => 'rack/ssl'   # force SSL
