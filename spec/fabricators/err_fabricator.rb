@@ -1,15 +1,15 @@
 Fabricator :err do
-  problem!
-  error_class!         { 'FooError' }
+  problem
+  error_class         { 'FooError' }
   component     'foo'
   action        'bar'
   environment   'production'
 end
 
 Fabricator :notice do
-  err!
+  err
   message             'FooError: Too Much Bar'
-  backtrace!
+  backtrace
   server_environment  { {'environment-name' => 'production'} }
   request             {{ 'component' => 'foo', 'action' => 'bar' }}
   notifier            {{ 'name' => 'Notifier', 'version' => '1', 'url' => 'http://toad.com' }}

@@ -17,16 +17,10 @@ class Notice
 
   belongs_to :err
   belongs_to :backtrace, :index => true
-  index :created_at
-  index(
-    [
-      [ :err_id, Mongo::ASCENDING ],
-      [ :created_at, Mongo::ASCENDING ],
-      [ :_id, Mongo::ASCENDING ]
-    ]
-  )
+  index({ created_at: 1 })
+  index({ err_id: 1, created_at: 1, _id: 1 })
 
-  after_create :increase_counter_cache, :cache_attributes_on_problem, :unresolve_problem
+  after_create :increase_counter_cache, :cache_attributes_on_problem, :unresolve_problem, :round_created_at
   before_save :sanitize
   before_destroy :decrease_counter_cache, :remove_cached_attributes_from_problem
 
@@ -155,5 +149,9 @@ class Notice
     end
   end
 
+  def round_created_at()
+    new_usec = self.created_at.usec - self.created_at.usec % 1000
+    self.created_at = self.created_at.change(usec: new_usec)
+  end
 end
 

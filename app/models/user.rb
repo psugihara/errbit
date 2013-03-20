@@ -13,6 +13,9 @@ class User
   field :per_page, :type => Fixnum, :default => PER_PAGE
   field :time_zone, :default => "UTC"
 
+  field :encrypted_password, :type => String, :default => ""
+  field :authentication_token, :type => String
+  
   after_destroy :destroy_watchers
   before_save :ensure_authentication_token
 

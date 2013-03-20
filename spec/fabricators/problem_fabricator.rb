@@ -1,5 +1,5 @@
 Fabricator(:problem) do
-  app! { Fabricate(:app) }
+  app { Fabricate(:app) }
   comments { [] }
 end
 

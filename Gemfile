@@ -1,9 +1,10 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.12'
-gem 'mongoid', '~> 2.4.10'
+gem 'mongoid', '~> 3.1.2'
 gem 'mongoid_rails_migrations'
-gem 'devise', '~> 1.5.4'
+gem 'devise', '~> 2.1.0'
+gem 'devise-encryptable'
 gem 'haml'
 gem 'htmlentities', "~> 4.3.0"
 gem 'rack-ssl', :require => 'rack/ssl'   # force SSL
@@ -14,7 +15,7 @@ gem 'SystemTimer', :platform => :ruby_18
 gem 'actionmailer_inline_css', "~> 1.3.0"
 gem 'kaminari', '>= 0.14.1'
 gem 'rack-ssl-enforcer'
-gem 'fabrication', "~> 1.3.0"   # Used for both tests and demo data
+gem 'fabrication', "~> 2.6.3"   # Used for both tests and demo data
 gem 'rails_autolink', '~> 1.0.9'
 # Please don't update hoptoad_notifier to airbrake.
 # It's for internal use only, and we monkeypatch certain methods
@@ -64,9 +65,9 @@ gem 'omniauth-github'
 
 
 platform :ruby do
-  gem 'mongo', '= 1.6.2'
-  gem 'bson', '= 1.6.2'
-  gem 'bson_ext', '= 1.6.2'
+  gem 'mongo', '= 1.8.3'
+  gem 'bson', '= 1.8.3'
+  gem 'bson_ext', '= 1.8.3'
 end
 
 gem 'ri_cal'
@@ -95,7 +96,7 @@ gem 'foreman', :group => :development
 group :test do
   gem 'capybara'
   gem 'launchy'
-  gem 'database_cleaner', '~> 0.6.0'
+  gem 'database_cleaner', '~> 0.9.1'
   gem 'email_spec'
   gem 'timecop'
 end
