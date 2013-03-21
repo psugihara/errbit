@@ -51,7 +51,7 @@ class Problem
 
   def self.all_else_unresolved all
     if all
-      find(:all)
+      Problem.all
     else
       where(:resolved => false)
     end
