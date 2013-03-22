@@ -7,14 +7,16 @@ describe ProblemDestroy do
 
   context "in unit way" do
     let(:problem) {
-      problem = Problem.new
+      problem = Problem.create
       problem.stub(:errs).and_return(mock(:criteria, :only => [err_1, err_2]))
-      problem.stub(:comments).and_return(mock(:criteria, :only => [comment_1, comment_2]))
       problem.stub(:delete)
+      problem.stub(:emailable?).and_return(false)
+      problem.stub(:comments).and_return(mock(:criteria, :only => [comment_1, comment_2]))
       problem
     }
-    let(:err_1) { Err.new }
-    let(:err_2) { Err.new }
+
+    let(:err_1) { Err.create }
+    let(:err_2) { Err.create }
 
     let(:comment_1) { Comment.new }
     let(:comment_2) { Comment.new }
@@ -32,12 +34,13 @@ describe ProblemDestroy do
       end
 
       it 'delete all errs associate' do
-        Err.collection.should_receive(:remove).with(:_id => { '$in' => [err_1.id, err_2.id] })
         problem_destroy.execute
+        Err.collection.find(_id: err_1.id).first.should be_nil
+        Err.collection.find(_id: err_2.id).first.should be_nil
       end
 
       it 'delete all comments associate' do
-        Comment.collection.should_receive(:remove).with(:_id => { '$in' => [comment_1.id, comment_2.id] })
+        Comment.collection.should_receive(:find).with(:_id => { '$in' => [comment_1.id, comment_2.id] })
         problem_destroy.execute
       end
 
